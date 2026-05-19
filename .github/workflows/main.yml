@@ -1,0 +1,13 @@
+name:test yml
+
+on:
+  push:
+  - branches: [main]
+
+jobs: 
+  disbale:
+    run-on: ubuntu-latest
+
+    steps;
+      - name:print massage
+        run: echo "schedual workfow executed"
