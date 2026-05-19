@@ -1,4 +1,4 @@
-name: Node.js Workflow
+name: Deployment Pipeline
 
 on:
   push:
@@ -6,26 +6,26 @@ on:
       - main
 
 jobs:
-  build:
+
+  dev:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: Dev Stage
+        run: echo "Deploying to DEV environment"
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
+  pre-prod:
+    runs-on: ubuntu-latest
+    needs: dev
 
-      - name: Install Dependencies
-        run: npm install
+    steps:
+      - name: Pre-Prod Stage
+        run: echo "Deploying to PRE-PROD environment"
 
-      - name: Run Application
-        run: node index.js
+  production:
+    runs-on: ubuntu-latest
+    needs: pre-prod
 
-      - name: Run Tests
-        run: npm test
-
-      - name: Build Project
-        run: npm run build
+    steps:
+      - name: Production Stage
+        run: echo "Deploying to PRODUCTION environment"
