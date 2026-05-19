@@ -1,13 +1,20 @@
-name: test yml
+name: Test Workflow
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  disable:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: print message
-        run: echo "scheduled workflow executed"
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print message
+        run: echo "GitHub Action is working successfully!"
+
+      - name: Show date
+        run: date
